@@ -89,6 +89,55 @@ h3{
   margin-top:4px;
 }
 
+.vidwaan-section{
+  margin-top:30px;
+  margin-bottom:40px;
+  text-align:center;
+}
+
+.vidwaan-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:20px;
+  margin-top:20px;
+}
+
+.vidwaan-card{
+  background:#000;
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+  transition:transform .25s ease;
+}
+
+.vidwaan-card:hover{
+  transform:translateY(-6px);
+}
+
+.vidwaan-card img{
+  width:100%;
+  height:180px;
+  object-fit:contain;
+  filter:grayscale(100%) contrast(1.15);
+}
+
+.vidwaan-name{
+  margin-top:10px;
+  font-weight:600;
+  color:#fff;
+  letter-spacing:.5px;
+}
+
+.vidwaan-note{
+  margin-top:14px;
+  font-size:.7rem;
+  color:#555;
+}
+
+.vidwaan-note span{
+  font-style:italic;
+}
+
 .category-header{
   cursor:pointer;
   user-select:none;
@@ -165,6 +214,40 @@ Auspicious music is not entertainment alone — it is a cultural and spiritual i
 <p>
 In Hindu tradition, whenever a meaningful beginning, transition, or celebration occurs, sacred sound is invoked — to align human activity with divine order and to remind society that life itself is a sacred journey.
 </p>
+
+</div>
+
+<h2>Vidwaan Guidelines for Performing Auspicious Music</h2>
+
+<div class="vidwaan-section">
+
+  <div class="vidwaan-grid">
+
+    <div class="vidwaan-card">
+      <img src="nadaswaram.png" alt="Nadaswaram Vidwaan">
+      <div class="vidwaan-name">Nadaswaram(Shehnai)</div>
+    </div>
+
+    <div class="vidwaan-card">
+      <img src="dolu.png" alt="Dolu Vidwaan">
+      <div class="vidwaan-name">Dolu(Thavil)</div>
+    </div>
+
+    <div class="vidwaan-card">
+      <img src="saxophone.png" alt="Saxophone Vidwaan">
+      <div class="vidwaan-name">Saxophone</div>
+    </div>
+
+    <div class="vidwaan-card">
+      <img src="drum.png" alt="Drum Vidwaan">
+      <div class="vidwaan-name">Drum</div>
+    </div>
+
+  </div>
+
+  <div class="vidwaan-note">
+    Some other Vidwaans also traditionally or regionally used. 
+  </div>
 
 </div>
 
