@@ -160,6 +160,14 @@ h2{
 .why{ margin-top:6px; font-size:.9rem; }
 .ref{ margin-top:4px; font-size:.75rem; font-style:italic; color:#666; }
 
+/* 🔹 Classification (NEW) */
+.classification{
+  margin-top:4px;
+  font-size:.75rem;
+  color:#444;
+  font-style:italic;
+}
+
 /* ---------- NOTE ---------- */
 .note-wrapper{
   margin-top:50px;
@@ -272,7 +280,6 @@ fetch("./master_heritage.json")
 
     h.onclick=()=>{
 
-      /* Collapse if same */
       if(activeHeader===h){
         h.classList.remove("active");
         activeContent.remove();
@@ -281,7 +288,6 @@ fetch("./master_heritage.json")
         return;
       }
 
-      /* Close previous */
       if(activeHeader){
         activeHeader.classList.remove("active");
         activeContent.remove();
@@ -298,16 +304,20 @@ fetch("./master_heritage.json")
       grouped[cat].forEach(o=>{
         const d=document.createElement("div");
         d.className="card";
-        d.innerHTML=`<div class="name">${o.name}</div>${o.why?`<div class="why">Why: "${o.why}"</div>`:""}${o.ref?`<div class="ref">Reference: "${o.ref}"</div>`:""}`;
+
+        d.innerHTML=`
+          <div class="name">${o.name}</div>
+          ${o.why ? `<div class="why">Why: "${o.why}"</div>` : ""}
+          ${o.ref ? `<div class="ref">Reference: "${o.ref}"</div>` : ""}
+          ${o.textual_classification ? `<div class="classification">Classification: "${o.textual_classification}"</div>` : ""}
+        `;
+
         g.appendChild(d);
       });
 
       content.appendChild(g);
-
-      /* Insert content immediately after header */
       h.after(content);
 
-      /* Click anywhere inside → collapse */
       content.onclick=()=>{
         h.classList.remove("active");
         content.remove();
