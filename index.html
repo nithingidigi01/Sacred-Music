@@ -40,10 +40,11 @@ h2{
 }
 
 h3{
-  margin-bottom:10px;
+  margin-top:40px;
+  margin-bottom:12px;
   font-size:1.4rem;
-  border-left:4px solid #4caf50;
-  padding-left:10px;
+  border-left:5px solid #4caf50;
+  padding-left:12px;
 }
 
 .why{
@@ -169,41 +170,38 @@ fetch("./master_heritage.json")
   const container = document.getElementById("grid");
   container.innerHTML = "";
 
-  // 1. Group by category
+  // ✅ Correct grouping (cat → category → domain)
   const grouped = {};
+
   data.forEach(o => {
-    const cat = o.category || o.domain || "Other";
+    const cat = o.cat || o.category || o.domain || "Other";
     if (!grouped[cat]) grouped[cat] = [];
     grouped[cat].push(o);
   });
 
-  // 2. Render category-wise
+  // ✅ Render each category separately
   Object.keys(grouped).sort().forEach(cat => {
 
     // Category heading
-    const h = document.createElement("h3");
-    h.textContent = cat;
-    h.style.marginTop = "40px";
-    h.style.textAlign = "left";
-    container.appendChild(h);
+    const heading = document.createElement("h3");
+    heading.textContent = cat;
+    container.appendChild(heading);
 
-    // Category grid
+    // Category section
     const section = document.createElement("div");
     section.className = "grid";
 
     grouped[cat].forEach(o => {
-      const d = document.createElement("div");
-      d.className = "card";
+      const card = document.createElement("div");
+      card.className = "card";
 
-      d.innerHTML = `
+      card.innerHTML = `
         <div class="name">${o.name || ("Occasion " + o.id)}</div>
-
         ${o.why ? `<div class="why">${o.why}</div>` : ""}
-
         ${o.reference ? `<div class="ref">Reference: ${o.reference}</div>` : ""}
       `;
 
-      section.appendChild(d);
+      section.appendChild(card);
     });
 
     container.appendChild(section);
