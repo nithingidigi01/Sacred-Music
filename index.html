@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Traditional Auspicious Music</title>
+
+<style>
+
+body{
+  margin:0;
+  font-family:system-ui, sans-serif;
+  background:#f6f7fb;
+  color:#222;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+h1{
+  text-align:center;
+  font-size:2.2rem;
+}
+
+.intro{
+  background:white;
+  padding:20px;
+  border-radius:14px;
+  line-height:1.6;
+  box-shadow:0 4px 12px rgba(0,0,0,.06);
+}
+
+h2{
+  margin-top:40px;
+  text-align:center;
+}
+
+.grid{
+  margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px;
+}
+
+.card{
+  background:white;
+  padding:14px;
+  border-radius:12px;
+  box-shadow:0 3px 10px rgba(0,0,0,.08);
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+}
+
+.name{
+  font-weight:600;
+}
+
+.domain{
+  font-size:.8rem;
+  opacity:.6;
+  margin-top:4px;
+}
+
+footer{
+  margin:40px 0 10px;
+  text-align:center;
+  opacity:.6;
+  font-size:.9rem;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Traditional Auspicious Music in Hindu Civilization</h1>
+
+<div class="intro">
+
+<p>
+From the earliest times, Hindu civilization has regarded sound and music as sacred forces that harmonize human life with cosmic order (ṛta). The Vedas describe sound (Nāda) as a divine principle, with mantra and melody used to invoke peace, prosperity, health, and spiritual balance.
+</p>
+
+<p>
+The Sāmaveda is entirely dedicated to musical chanting, showing that sacred knowledge itself was meant to be sung. Vedic hymns were not merely recited — they were performed with rhythm and tonal precision to create auspicious vibration during rituals, life events, and daily worship.
+</p>
+
+<p>
+The Gṛhya Sūtras prescribe music and sacred sound during household rites (saṁskāras) such as birth ceremonies, naming, education, marriage, and funeral observances. These texts establish that important moments of human life should be accompanied by auspicious sound to sanctify transitions.
+</p>
+
+<p>
+The Smṛtis and Purāṇas further affirm that music, drums, wind instruments, bells, and chanting are integral to temples, festivals, royal occasions, and community gatherings. They emphasize that auspicious music pleases the deities, purifies the environment, and brings collective harmony.
+</p>
+
+<p>
+The Nāṭya Śāstra declares music to be a divine gift meant for the welfare of society, capable of providing joy, moral guidance, and emotional healing.
+</p>
+
+<p>
+<strong>
+Auspicious music is not entertainment alone — it is a cultural and spiritual instrument used to bless every stage of life, from conception to remembrance after death, and every sphere of society, from home and temple to work, agriculture, and community life.
+</strong>
+</p>
+
+<p>
+In Hindu tradition, whenever a meaningful beginning, transition, or celebration occurs, sacred sound is invoked — to align human activity with divine order and to remind society that life itself is a sacred journey.
+</p>
+
+</div>
+
+<h2>Occasions Where Auspicious Music Is Performed</h2>
+
+<div id="grid" class="grid"></div>
+
+<footer>
+Heritage Moments • Living Cultural Registry
+</footer>
+
+</div>
+
+<script>
+
+fetch("./master_heritage.json")
+.then(r=>r.json())
+.then(data=>{
+  const grid=document.getElementById("grid");
+
+  data.forEach(o=>{
+    const d=document.createElement("div");
+    d.className="card";
+    d.innerHTML=`
+      <div class="name">${o.name || ("Occasion "+o.id)}</div>
+      <div class="domain">${o.category || o.domain || ""}</div>
+    `;
+    grid.appendChild(d);
+  });
+});
+
+</script>
+
+</body>
+</html>
