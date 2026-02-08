@@ -16,6 +16,24 @@ body{
   color:#222;
 }
 
+/* ---- CONTENT PROTECTION ---- */
+*{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+img{
+  pointer-events: none;
+}
+
+/* Allow selection only inside input (if any future forms) */
+input, textarea{
+  user-select: text;
+}
+  
+
 .container{
   max-width:1100px;
   margin:auto;
@@ -194,7 +212,7 @@ h2{
 }
 
 .note-content.open{ display:block; }
-
+  
 /* ---------- FOOTER ---------- */
 footer{
   margin:40px 0 10px;
@@ -427,5 +445,83 @@ document.getElementById("noteToggle").onclick=()=>{
 };
 </script>
 
+<script>
+/* ---------- BASIC BLOCKS ---------- */
+
+// Disable right click
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+// Disable copy / cut / paste
+["copy","cut","paste"].forEach(evt=>{
+  document.addEventListener(evt, e => {
+    e.preventDefault();
+    showWarning();
+  });
+});
+
+// Disable drag
+document.addEventListener("dragstart", e => e.preventDefault());
+
+// Disable key shortcuts
+document.addEventListener("keydown", e => {
+
+  // Ctrl / Cmd combinations
+  if (
+    (e.ctrlKey || e.metaKey) &&
+    ["c","u","s","p","x","i","j"].includes(e.key.toLowerCase())
+  ) {
+    e.preventDefault();
+    showWarning();
+  }
+
+  // F12
+  if (e.key === "F12") {
+    e.preventDefault();
+    showWarning();
+  }
+});
+
+/* ---------- DEVTOOLS DETECTION (DETERRENT) ---------- */
+(function(){
+  let threshold = 160;
+  setInterval(()=>{
+    if (
+      window.outerWidth - window.innerWidth > threshold ||
+      window.outerHeight - window.innerHeight > threshold
+    ){
+      document.body.style.filter = "blur(6px)";
+    } else {
+      document.body.style.filter = "none";
+    }
+  }, 500);
+})();
+
+/* ---------- WARNING UI ---------- */
+function showWarning(){
+  if(document.getElementById("heritage-warning")) return;
+
+  const w = document.createElement("div");
+  w.id = "heritage-warning";
+  w.innerText = "This cultural content is protected. Please read respectfully.";
+  w.style.cssText = `
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#2e7d32;
+    color:#fff;
+    padding:10px 18px;
+    border-radius:20px;
+    font-size:14px;
+    z-index:9999;
+    box-shadow:0 6px 18px rgba(0,0,0,.25);
+  `;
+  document.body.appendChild(w);
+
+  setTimeout(()=>w.remove(), 2000);
+}
+</script>
+
+  
 </body>
 </html>
