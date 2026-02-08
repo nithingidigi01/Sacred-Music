@@ -47,28 +47,16 @@ h3{
   padding-left:12px;
 }
 
-.why{
-  margin-top:6px;
-  font-size:0.9rem;
-  color:#333;
-}
-
-.ref{
-  margin-top:4px;
-  font-size:0.75rem;
-  color:#666;
-  font-style:italic;
-}
-
+/* GRID */
 .grid{
-  margin-top:20px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:14px;
 }
 
+/* CARD */
 .card{
-  background:white;
+  background:#fff;
   padding:14px;
   border-radius:12px;
   box-shadow:0 3px 10px rgba(0,0,0,.08);
@@ -81,6 +69,18 @@ h3{
 
 .name{
   font-weight:600;
+}
+
+.why{
+  margin-top:6px;
+  font-size:.9rem;
+}
+
+.ref{
+  margin-top:4px;
+  font-size:.75rem;
+  font-style:italic;
+  color:#666;
 }
 
 .domain{
@@ -263,24 +263,25 @@ h3{
   color:#555;
 }
 
-/* Category bar (headers only) */
+/* CATEGORY BAR */
 #category-bar{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
-  gap:12px;
+  grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+  gap:14px;
   margin-top:30px;
 }
 
-/* Category header cards */
+/* CATEGORY CARD */
 .category-header{
-  cursor:pointer;
   background:#f0f4f0;
-  padding:12px;
-  border-radius:10px;
   border-left:5px solid #4caf50;
-  font-size:1.05rem;
+  padding:14px 12px;
+  border-radius:12px;
   text-align:center;
-  transition:transform .2s ease, box-shadow .2s ease;
+  cursor:pointer;
+  font-size:1.05rem;
+  font-weight:600;
+  transition:all .25s ease;
 }
 
 .category-header:hover{
@@ -290,53 +291,46 @@ h3{
 
 .category-header.active{
   background:#e4efe4;
+  box-shadow:0 8px 18px rgba(0,0,0,.15);
 }
 
-/* Expanded content area (single column always) */
+/* COUNT BADGE */
+.category-count{
+  display:block;
+  margin-top:4px;
+  font-size:.8rem;
+  opacity:.7;
+}
+
+/* EXPANDED CONTENT */
 #category-content-area{
-  margin-top:20px;
+  margin-top:22px;
 }
 
-/* Content wrapper */
 .category-content{
   background:#ffffff;
   padding:18px;
   border-radius:14px;
-  box-shadow:0 8px 22px rgba(0,0,0,.12);
+  box-shadow:0 10px 26px rgba(0,0,0,.14);
+  animation:expandFade .28s ease;
 }
 
-/* Mobile behavior */
-@media (max-width: 600px){
-  #category-bar{
-    grid-template-columns:1fr;
-  }
-}
-
-/* Category badge */
-.category-header{
-  position:relative;
-}
-
-.category-count{
-  font-size:0.85rem;
-  opacity:0.7;
-  margin-left:6px;
-}
-
-/* Smooth animation for category content */
-.category-content{
-  overflow:hidden;
-  animation:fadeIn .25s ease;
-}
-
-@keyframes fadeIn{
+/* ANIMATION */
+@keyframes expandFade{
   from{
     opacity:0;
-    transform:translateY(-6px);
+    transform:translateY(-8px);
   }
   to{
     opacity:1;
     transform:translateY(0);
+  }
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  #category-bar{
+    grid-template-columns:1fr;
   }
 }
 
@@ -524,31 +518,28 @@ fetch("./master_heritage.json")
 
   const grouped = {};
 
-  // Group by category
+  // Group strictly by JSON category
   data.forEach(o => {
-    const cat = o.cat || o.category || o.domain || "Other";
+    const cat = o.cat || "Other";
     if (!grouped[cat]) grouped[cat] = [];
     grouped[cat].push(o);
   });
 
-  // Alphabetical order
   const categories = Object.keys(grouped).sort();
-
   let activeCategory = null;
 
   categories.forEach(cat => {
 
-    // Create header
     const header = document.createElement("div");
     header.className = "category-header";
     header.innerHTML = `
-      <span>${cat}</span>
+      ${cat}
       <span class="category-count">· ${grouped[cat].length}</span>
-`   ;
+    `;
 
     header.addEventListener("click", () => {
 
-      // If already open → close
+      // Toggle OFF
       if (activeCategory === cat) {
         activeCategory = null;
         contentArea.innerHTML = "";
@@ -557,7 +548,7 @@ fetch("./master_heritage.json")
         return;
       }
 
-      // Open new category
+      // Activate new
       activeCategory = cat;
       contentArea.innerHTML = "";
 
@@ -566,7 +557,6 @@ fetch("./master_heritage.json")
 
       header.classList.add("active");
 
-      // Build content
       const wrapper = document.createElement("div");
       wrapper.className = "category-content";
 
@@ -577,12 +567,10 @@ fetch("./master_heritage.json")
         const card = document.createElement("div");
         card.className = "card";
 
-        const refText = o.ref || o.reference || "";
-
         card.innerHTML = `
           <div class="name">${o.name}</div>
           ${o.why ? `<div class="why">Why: "${o.why}"</div>` : ""}
-          ${refText ? `<div class="ref">Reference: "${refText}"</div>` : ""}
+          ${o.ref ? `<div class="ref">Reference: "${o.ref}"</div>` : ""}
         `;
 
         grid.appendChild(card);
@@ -590,21 +578,6 @@ fetch("./master_heritage.json")
 
       wrapper.appendChild(grid);
       contentArea.appendChild(wrapper);
-
-      // 🔥 Auto-collapse when clicking anywhere inside content
-      wrapper.addEventListener("click", () => {
-        wrapper.style.opacity = "0";
-        wrapper.style.transform = "translateY(-6px)";
-
-        setTimeout(() => {
-          activeCategory = null;
-          contentArea.innerHTML = "";
-          document.querySelectorAll(".category-header")
-            .forEach(h => h.classList.remove("active"));
-        }, 200);
-      });
-
-
     });
 
     bar.appendChild(header);
@@ -612,6 +585,7 @@ fetch("./master_heritage.json")
 
 });
 </script>
+
 
 
 <script>
