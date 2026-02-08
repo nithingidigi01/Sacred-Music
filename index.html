@@ -68,6 +68,19 @@ h2{
   margin-top:4px;
 }
 
+.why{
+  margin-top:6px;
+  font-size:0.9rem;
+  color:#333;
+}
+
+.ref{
+  margin-top:4px;
+  font-size:0.75rem;
+  color:#666;
+  font-style:italic;
+}
+  
 footer{
   margin:40px 0 10px;
   text-align:center;
@@ -129,23 +142,28 @@ Heritage Moments • Living Cultural Registry
 </div>
 
 <script>
-
 fetch("./master_heritage.json")
-.then(r=>r.json())
-.then(data=>{
-  const grid=document.getElementById("grid");
+.then(r => r.json())
+.then(data => {
+  const grid = document.getElementById("grid");
 
-  data.forEach(o=>{
-    const d=document.createElement("div");
-    d.className="card";
-    d.innerHTML=`
-      <div class="name">${o.name || ("Occasion "+o.id)}</div>
+  data.forEach(o => {
+    const d = document.createElement("div");
+    d.className = "card";
+
+    d.innerHTML = `
+      <div class="name">${o.name || ("Occasion " + o.id)}</div>
+
+      ${o.why ? `<div class="why">${o.why}</div>` : ""}
+
+      ${o.reference ? `<div class="ref">Reference: ${o.reference}</div>` : ""}
+
       <div class="domain">${o.category || o.domain || ""}</div>
     `;
+
     grid.appendChild(d);
   });
 });
-
 </script>
 
 </body>
