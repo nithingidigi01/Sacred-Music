@@ -8,6 +8,7 @@
 
 <style>
 
+/* ---------- BASE ---------- */
 body{
   margin:0;
   font-family:system-ui, sans-serif;
@@ -26,6 +27,12 @@ h1{
   font-size:2.2rem;
 }
 
+h2{
+  margin-top:40px;
+  text-align:center;
+}
+
+/* ---------- INTRO ---------- */
 .intro{
   background:white;
   padding:20px;
@@ -34,62 +41,7 @@ h1{
   box-shadow:0 4px 12px rgba(0,0,0,.06);
 }
 
-h2{
-  margin-top:40px;
-  text-align:center;
-}
-
-h3{
-  margin-top:40px;
-  margin-bottom:12px;
-  font-size:1.4rem;
-  border-left:5px solid #4caf50;
-  padding-left:12px;
-}
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:14px;
-}
-
-/* CARD */
-.card{
-  background:#fff;
-  padding:14px;
-  border-radius:12px;
-  box-shadow:0 3px 10px rgba(0,0,0,.08);
-  transition:.2s;
-}
-
-.card:hover{
-  transform:translateY(-3px);
-}
-
-.name{
-  font-weight:600;
-}
-
-.why{
-  margin-top:6px;
-  font-size:.9rem;
-}
-
-.ref{
-  margin-top:4px;
-  font-size:.75rem;
-  font-style:italic;
-  color:#666;
-}
-
-.domain{
-  font-size:.8rem;
-  opacity:.6;
-  margin-top:4px;
-}
-
-/* Vidwaan section */
+/* ---------- VIDWAAN ---------- */
 .vidwaan-section{
   margin-top:30px;
   margin-bottom:40px;
@@ -104,11 +56,11 @@ h3{
 }
 
 .vidwaan-card{
-  background:#fff;              /* ✅ white background */
+  background:#fff;
   border-radius:16px;
   padding:14px;
   box-shadow:0 8px 22px rgba(0,0,0,.12);
-  transition:transform .25s ease, box-shadow .25s ease;
+  transition:.25s;
 }
 
 .vidwaan-card:hover{
@@ -125,153 +77,24 @@ h3{
 
 .vidwaan-name{
   margin-top:8px;
-  font-size:0.9rem;
+  font-size:.9rem;
   font-weight:600;
-  color:#222;
 }
 
 .vidwaan-note{
   margin-top:12px;
-  font-size:0.7rem;
+  font-size:.75rem;
   color:#666;
 }
 
-.vidwaan-note span{
-  font-style:italic;
-}
-  
-/* Accordion container */
-#accordion{
-  display:block;
-}
-
-/* Category header: always full width */
-.category-header{
-  width:100%;
-  cursor:pointer;
-  user-select:none;
-  background:#f0f4f0;
-  padding:12px 14px;
-  border-radius:10px;
-  border-left:5px solid #4caf50;
-  font-size:1.2rem;
-  margin-top:18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-/* Icons */
-.category-header::after{
-  content:"+";
-  font-size:1.3rem;
-  font-weight:600;
-}
-
-.category-header.active::after{
-  content:"–";
-}
-
-/* Content MUST be block + hidden */
-.category-content{
-  display:none;
-  width:100%;
-  margin-top:10px;
-}
-
-.category-content.open{
-  display:block;
-}
-
-/* Note accordion */
-.note-wrapper{
-  margin-top:50px;
-  border-top:1px solid #ddd;
-  padding-top:20px;
-}
-
-.note-header{
-  cursor:pointer;
-  background:#eef3ee;
-  padding:12px 16px;
-  border-radius:10px;
-  font-size:1.1rem;
-  font-weight:600;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.note-header::after{
-  content:"+";
-  font-size:1.3rem;
-}
-
-.note-header.active::after{
-  content:"–";
-}
-
-.note-content{
-  display:none;
-  margin-top:16px;
-  background:#ffffff;
-  padding:18px;
-  border-radius:12px;
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
-  line-height:1.6;
-  font-size:0.95rem;
-}
-
-.note-content.open{
-  display:block;
-}
-
-.note-content h4{
-  margin-top:0;
-  font-size:1.1rem;
-}
-
-.note-content h5{
-  margin-top:18px;
-  font-size:1rem;
-}
-
-.note-content ul{
-  margin-left:18px;
-}
-
-.inline-list{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  list-style:none;
-  padding:0;
-  margin-left:0;
-}
-
-.inline-list li{
-  background:#f0f4f0;
-  padding:4px 10px;
-  border-radius:20px;
-  font-size:0.8rem;
-}
-
-.note-footer{
-  margin-top:16px;
-  font-size:0.85rem;
-  font-style:italic;
-  color:#555;
-}
-
-/* CATEGORY BAR */
+/* ---------- CATEGORY BAR ---------- */
 #category-bar{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
   gap:14px;
   margin-top:30px;
 }
 
-/* CATEGORY CARD */
 .category-header{
   background:#f0f4f0;
   border-left:5px solid #4caf50;
@@ -279,9 +102,8 @@ h3{
   border-radius:12px;
   text-align:center;
   cursor:pointer;
-  font-size:1.05rem;
   font-weight:600;
-  transition:all .25s ease;
+  transition:.25s;
 }
 
 .category-header:hover{
@@ -294,7 +116,6 @@ h3{
   box-shadow:0 8px 18px rgba(0,0,0,.15);
 }
 
-/* COUNT BADGE */
 .category-count{
   display:block;
   margin-top:4px;
@@ -302,7 +123,7 @@ h3{
   opacity:.7;
 }
 
-/* EXPANDED CONTENT */
+/* ---------- CATEGORY CONTENT ---------- */
 #category-content-area{
   margin-top:22px;
 }
@@ -315,31 +136,92 @@ h3{
   animation:expandFade .28s ease;
 }
 
-/* ANIMATION */
 @keyframes expandFade{
-  from{
-    opacity:0;
-    transform:translateY(-8px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  from{opacity:0; transform:translateY(-8px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
-/* MOBILE */
-@media(max-width:600px){
-  #category-bar{
-    grid-template-columns:1fr;
-  }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px;
 }
 
-  
+.card{
+  background:white;
+  padding:14px;
+  border-radius:12px;
+  box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.card:hover{
+  transform:translateY(-3px);
+}
+
+.name{ font-weight:600; }
+.why{ margin-top:6px; font-size:.9rem; }
+.ref{ margin-top:4px; font-size:.75rem; font-style:italic; color:#666; }
+
+/* ---------- NOTE ---------- */
+.note-wrapper{
+  margin-top:50px;
+  border-top:1px solid #ddd;
+  padding-top:20px;
+}
+
+.note-header{
+  cursor:pointer;
+  background:#eef3ee;
+  padding:12px 16px;
+  border-radius:10px;
+  font-weight:600;
+}
+
+.note-content{
+  display:none;
+  margin-top:16px;
+  background:#fff;
+  padding:18px;
+  border-radius:12px;
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
+  line-height:1.6;
+}
+
+.note-content.open{ display:block; }
+
+.inline-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  list-style:none;
+  padding:0;
+}
+
+.inline-list li{
+  background:#f0f4f0;
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:.8rem;
+}
+
+.note-footer{
+  margin-top:16px;
+  font-size:.85rem;
+  font-style:italic;
+  color:#555;
+}
+
+/* ---------- FOOTER ---------- */
 footer{
   margin:40px 0 10px;
   text-align:center;
   opacity:.6;
   font-size:.9rem;
+}
+
+/* ---------- MOBILE ---------- */
+@media(max-width:600px){
+  #category-bar{ grid-template-columns:1fr; }
 }
 
 </style>
@@ -352,71 +234,22 @@ footer{
 <h1>Traditional Auspicious Music in Hindu Civilization</h1>
 
 <div class="intro">
-
-<p>
-From the earliest times, Hindu civilization has regarded sound and music as sacred forces that harmonize human life with cosmic order (ṛta). The Vedas describe sound (Nāda) as a divine principle, with mantra and melody used to invoke peace, prosperity, health, and spiritual balance.
-</p>
-
-<p>
-The Sāmaveda is entirely dedicated to musical chanting, showing that sacred knowledge itself was meant to be sung. Vedic hymns were not merely recited — they were performed with rhythm and tonal precision to create auspicious vibration during rituals, life events, and daily worship.
-</p>
-
-<p>
-The Gṛhya Sūtras prescribe music and sacred sound during household rites (saṁskāras) such as birth ceremonies, naming, education, marriage, and funeral observances. These texts establish that important moments of human life should be accompanied by auspicious sound to sanctify transitions.
-</p>
-
-<p>
-The Smṛtis and Purāṇas further affirm that music, drums, wind instruments, bells, and chanting are integral to temples, festivals, royal occasions, and community gatherings. They emphasize that auspicious music pleases the deities, purifies the environment, and brings collective harmony.
-</p>
-
-<p>
-The Nāṭya Śāstra declares music to be a divine gift meant for the welfare of society, capable of providing joy, moral guidance, and emotional healing.
-</p>
-
-<p>
-<strong>
-Auspicious music is not entertainment alone — it is a cultural and spiritual instrument used to bless every stage of life, from conception to remembrance after death, and every sphere of society, from home and temple to work, agriculture, and community life.
-</strong>
-</p>
-
-<p>
-In Hindu tradition, whenever a meaningful beginning, transition, or celebration occurs, sacred sound is invoked — to align human activity with divine order and to remind society that life itself is a sacred journey.
-</p>
-
+  <p>From the earliest times, Hindu civilization has regarded sound and music as sacred forces that harmonize human life with cosmic order (ṛta).</p>
+  <p>The Sāmaveda is entirely dedicated to musical chanting, showing that sacred knowledge itself was meant to be sung.</p>
+  <p>Gṛhya Sūtras prescribe music during household rites such as birth, naming, education, marriage, and funerals.</p>
+  <p>Smṛtis, Purāṇas, and the Nāṭya Śāstra affirm music as essential to temples, festivals, and social harmony.</p>
 </div>
 
 <h2>Vidwaan Guidelines for Performing Auspicious Music</h2>
 
 <div class="vidwaan-section">
-
   <div class="vidwaan-grid">
-
-    <div class="vidwaan-card">
-      <img src="nadaswaram1.png" alt="Nadaswaram Vidwaan">
-      <div class="vidwaan-name">Nadaswaram</div>
-    </div>
-
-    <div class="vidwaan-card">
-      <img src="dolu1.png" alt="Dolu Vidwaan">
-      <div class="vidwaan-name">Dolu(Thavil)</div>
-    </div>
-
-    <div class="vidwaan-card">
-      <img src="saxophone1.png" alt="Saxophone Vidwaan">
-      <div class="vidwaan-name">Saxophone</div>
-    </div>
-
-    <div class="vidwaan-card">
-      <img src="drum1.png" alt="Drum Vidwaan">
-      <div class="vidwaan-name">Drum</div>
-    </div>
-
+    <div class="vidwaan-card"><img src="nadaswaram1.png"><div class="vidwaan-name">Nadaswaram</div></div>
+    <div class="vidwaan-card"><img src="dolu1.png"><div class="vidwaan-name">Dolu (Thavil)</div></div>
+    <div class="vidwaan-card"><img src="saxophone1.png"><div class="vidwaan-name">Saxophone</div></div>
+    <div class="vidwaan-card"><img src="drum1.png"><div class="vidwaan-name">Drum</div></div>
   </div>
-
-  <div class="vidwaan-note">
-    Some other Vidwaans are also traditionally or regionally used.
-  </div>
-
+  <div class="vidwaan-note">Some other Vidwaans are also traditionally or regionally used.</div>
 </div>
 
 <h2>Occasions Where Auspicious Music Is Performed</h2>
@@ -424,80 +257,16 @@ In Hindu tradition, whenever a meaningful beginning, transition, or celebration 
 <div id="category-bar"></div>
 <div id="category-content-area"></div>
 
-
-<!-- Note Section -->
 <div class="note-wrapper">
-
-  <div class="note-header" id="noteToggle">
-    Note
-  </div>
-
+  <div class="note-header" id="noteToggle">Note</div>
   <div class="note-content" id="noteContent">
-
-    <h4>Understanding How These Occasions Are Identified</h4>
-
-    <p>
-      The occasions presented here are identified using a layered cultural understanding rooted in Hindu civilizational knowledge, where sound and music are regarded as sacred forces shaping life, society, and the environment.
-    </p>
-
-    <h5>Primary Sources</h5>
-    <ul>
-      <li>The Vedas, with special emphasis on the Sāmaveda, for principles of sacred sound (Nāda)</li>
-      <li>Gṛhya Sūtras and Dharmaśāstras for life-cycle rites (Saṁskāras)</li>
-      <li>Āgamas for temple-based ritual sound practices</li>
-      <li>Purāṇas for festival, river, and seasonal contexts</li>
-    </ul>
-
-    <h5>Secondary Sources</h5>
-    <ul>
-      <li>Living temple traditions</li>
-      <li>Regional folk practices</li>
-      <li>Oral cultural continuities</li>
-      <li>Community-based ritual observances</li>
-    </ul>
-
-    <h5>How Occasions Are Classified</h5>
-    <p>
-      Each occasion is grouped based on the source lineage from which the practice emerges. This does not imply hierarchy, but helps understand cultural roots.
-    </p>
-
+    <p>This collection reflects layered Hindu cultural knowledge drawn from Vedic, Smriti, Agama, Puranic, folk, and modern dharmic traditions.</p>
     <ul class="inline-list">
-      <li>Vedic</li>
-      <li>Smriti</li>
-      <li>Agama</li>
-      <li>Puranic</li>
-      <li>Folk / Regional</li>
-      <li>Modern (Dharmic Extension)</li>
+      <li>Vedic</li><li>Smriti</li><li>Agama</li><li>Puranic</li><li>Folk</li><li>Modern</li>
     </ul>
-
-    <h5>Modern Life Contexts</h5>
-    <p>
-      Contemporary occasions are included only when they align with enduring Hindu principles:
-    </p>
-
-    <ul>
-      <li>Auspicious beginnings (Śubha ārambha)</li>
-      <li>Gratitude (Kṛtajñatā)</li>
-      <li>Harmony between human activity and cosmic order (Ṛta)</li>
-    </ul>
-
-    <p>
-      Such occasions are clearly identified as modern extensions, ensuring clarity and cultural transparency.
-    </p>
-
-    <h5>Scope</h5>
-    <p>
-      This collection does not attempt to list every possible occasion. It reflects a living, evolving cultural expression shaped by texts, traditions, and continued practice.
-    </p>
-
-    <p class="note-footer">
-      No practice is presented as invented, and no modern practice is presented as ancient.
-    </p>
-
+    <p class="note-footer">No modern practice is presented as ancient.</p>
   </div>
-
 </div>
-
 
 <footer>
 Heritage Moments • Living Cultural Registry
@@ -511,101 +280,53 @@ fetch("./master_heritage.json")
 .then(data => {
 
   const bar = document.getElementById("category-bar");
-  const contentArea = document.getElementById("category-content-area");
-
-  bar.innerHTML = "";
-  contentArea.innerHTML = "";
-
+  const area = document.getElementById("category-content-area");
   const grouped = {};
+  let active = null;
 
-  // Group strictly by JSON category
-  data.forEach(o => {
-    const cat = o.cat || "Other";
-    if (!grouped[cat]) grouped[cat] = [];
-    grouped[cat].push(o);
+  data.forEach(o=>{
+    const c=o.cat||"Other";
+    if(!grouped[c]) grouped[c]=[];
+    grouped[c].push(o);
   });
 
-  const categories = Object.keys(grouped).sort();
-  let activeCategory = null;
+  Object.keys(grouped).sort().forEach(cat=>{
+    const h=document.createElement("div");
+    h.className="category-header";
+    h.innerHTML=`${cat}<span class="category-count">· ${grouped[cat].length}</span>`;
 
-  categories.forEach(cat => {
-
-    const header = document.createElement("div");
-    header.className = "category-header";
-    header.innerHTML = `
-      ${cat}
-      <span class="category-count">· ${grouped[cat].length}</span>
-    `;
-
-    header.addEventListener("click", () => {
-
-      // Toggle OFF
-      if (activeCategory === cat) {
-        activeCategory = null;
-        contentArea.innerHTML = "";
-        document.querySelectorAll(".category-header")
-          .forEach(h => h.classList.remove("active"));
+    h.onclick=()=>{
+      if(active===cat){
+        active=null; area.innerHTML="";
+        document.querySelectorAll(".category-header").forEach(x=>x.classList.remove("active"));
         return;
       }
+      active=cat; area.innerHTML="";
+      document.querySelectorAll(".category-header").forEach(x=>x.classList.remove("active"));
+      h.classList.add("active");
 
-      // Activate new
-      activeCategory = cat;
-      contentArea.innerHTML = "";
+      const wrap=document.createElement("div");
+      wrap.className="category-content";
+      const g=document.createElement("div"); g.className="grid";
 
-      document.querySelectorAll(".category-header")
-        .forEach(h => h.classList.remove("active"));
-
-      header.classList.add("active");
-
-      const wrapper = document.createElement("div");
-      wrapper.className = "category-content";
-
-      const grid = document.createElement("div");
-      grid.className = "grid";
-
-      grouped[cat].forEach(o => {
-        const card = document.createElement("div");
-        card.className = "card";
-
-        card.innerHTML = `
-          <div class="name">${o.name}</div>
-          ${o.why ? `<div class="why">Why: "${o.why}"</div>` : ""}
-          ${o.ref ? `<div class="ref">Reference: "${o.ref}"</div>` : ""}
-        `;
-
-        grid.appendChild(card);
+      grouped[cat].forEach(o=>{
+        const d=document.createElement("div");
+        d.className="card";
+        d.innerHTML=`<div class="name">${o.name}</div>${o.why?`<div class="why">Why: "${o.why}"</div>`:""}${o.ref?`<div class="ref">Reference: "${o.ref}"</div>`:""}`;
+        g.appendChild(d);
       });
 
-      wrapper.appendChild(grid);
-      contentArea.appendChild(wrapper);
-    });
-
-    bar.appendChild(header);
+      wrap.appendChild(g);
+      area.appendChild(wrap);
+    };
+    bar.appendChild(h);
   });
-
 });
+
+document.getElementById("noteToggle").onclick=()=>{
+  document.getElementById("noteContent").classList.toggle("open");
+};
 </script>
-
-
-
-
-<script>
-const noteHeader = document.getElementById("noteToggle");
-const noteContent = document.getElementById("noteContent");
-
-noteHeader.addEventListener("click", () => {
-  const isOpen = noteContent.classList.contains("open");
-
-  if(isOpen){
-    noteContent.classList.remove("open");
-    noteHeader.classList.remove("active");
-  } else {
-    noteContent.classList.add("open");
-    noteHeader.classList.add("active");
-  }
-});
-</script>
-
 
 </body>
 </html>
