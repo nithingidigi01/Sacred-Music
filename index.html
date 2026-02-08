@@ -167,15 +167,13 @@ fetch("./master_heritage.json")
     grouped[cat].push(o);
   });
 
-  // ✅ Alphabetical order of categories
+  // Alphabetical category order
   Object.keys(grouped).sort().forEach(cat => {
 
-    // Category heading
     const heading = document.createElement("h3");
     heading.textContent = cat;
     container.appendChild(heading);
 
-    // Category grid
     const section = document.createElement("div");
     section.className = "grid";
 
@@ -183,12 +181,14 @@ fetch("./master_heritage.json")
       const card = document.createElement("div");
       card.className = "card";
 
+      const refText = o.ref || o.reference || "";
+
       card.innerHTML = `
         <div class="name">${o.name || ("Occasion " + o.id)}</div>
 
         ${o.why ? `<div class="why">Why: "${o.why}"</div>` : ""}
 
-        ${o.reference ? `<div class="ref">Reference: "${o.reference}"</div>` : ""}
+        ${refText ? `<div class="ref">Reference: "${refText}"</div>` : ""}
       `;
 
       section.appendChild(card);
