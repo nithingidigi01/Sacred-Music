@@ -140,33 +140,47 @@ h3{
   font-style:italic;
 }
   
+/* Accordion container */
+#accordion{
+  display:block;
+}
+
+/* Category header: always full width */
 .category-header{
+  width:100%;
   cursor:pointer;
   user-select:none;
   background:#f0f4f0;
-  padding:10px 12px;
-  border-radius:8px;
+  padding:12px 14px;
+  border-radius:10px;
   border-left:5px solid #4caf50;
-  font-size:1.3rem;
-  margin-top:30px;
+  font-size:1.2rem;
+  margin-top:18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
+/* Icons */
 .category-header::after{
-  content:"➕";
-  float:right;
+  content:"+";
+  font-size:1.3rem;
+  font-weight:600;
 }
 
 .category-header.active::after{
-  content:"➖";
+  content:"–";
 }
 
-/* 🔴 FORCE CLOSED BY DEFAULT (ALL DEVICES) */
+/* Content MUST be block + hidden */
 .category-content{
-  display:none !important;
+  display:none;
+  width:100%;
+  margin-top:10px;
 }
 
 .category-content.open{
-  display:block !important;
+  display:block;
 }
   
 footer{
@@ -265,35 +279,35 @@ Heritage Moments • Living Cultural Registry
 
 <script>
 fetch("./master_heritage.json")
-.then(response => response.json())
+.then(res => res.json())
 .then(data => {
 
-  const container = document.getElementById("grid");
-  container.innerHTML = "";
+  const accordion = document.getElementById("accordion");
+  accordion.innerHTML = "";
 
   const grouped = {};
 
-  // 1️⃣ Group occasions by category
+  // Group by category
   data.forEach(o => {
     const cat = o.cat || o.category || o.domain || "Other";
     if (!grouped[cat]) grouped[cat] = [];
     grouped[cat].push(o);
   });
 
-  // 2️⃣ Render categories in alphabetical order
+  // Alphabetical category order
   Object.keys(grouped).sort().forEach(cat => {
 
-    // Category header
+    // Header
     const header = document.createElement("div");
     header.className = "category-header";
     header.textContent = cat;
 
-    // Category content (collapsed by default)
+    // Content
     const content = document.createElement("div");
     content.className = "category-content";
 
     const section = document.createElement("div");
-    section.className = "grid";
+    section.className = "grid"; // grid ONLY for cards
 
     grouped[cat].forEach(o => {
       const card = document.createElement("div");
@@ -302,7 +316,7 @@ fetch("./master_heritage.json")
       const refText = o.ref || o.reference || "";
 
       card.innerHTML = `
-        <div class="name">${o.name || ("Occasion " + o.id)}</div>
+        <div class="name">${o.name}</div>
         ${o.why ? `<div class="why">Why: "${o.why}"</div>` : ""}
         ${refText ? `<div class="ref">Reference: "${refText}"</div>` : ""}
       `;
@@ -312,7 +326,7 @@ fetch("./master_heritage.json")
 
     content.appendChild(section);
 
-    // 3️⃣ Accordion toggle logic (same for desktop & mobile)
+    // Accordion logic: ONLY ONE OPEN
     header.addEventListener("click", () => {
       const isOpen = content.classList.contains("open");
 
@@ -325,13 +339,9 @@ fetch("./master_heritage.json")
       }
     });
 
-    container.appendChild(header);
-    container.appendChild(content);
+    accordion.appendChild(header);
+    accordion.appendChild(content);
   });
-
-})
-.catch(err => {
-  console.error("Failed to load heritage data:", err);
 });
 </script>
 
