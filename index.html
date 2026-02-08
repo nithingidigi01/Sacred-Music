@@ -182,6 +182,164 @@ h3{
 .category-content.open{
   display:block;
 }
+
+/* Note accordion */
+.note-wrapper{
+  margin-top:50px;
+  border-top:1px solid #ddd;
+  padding-top:20px;
+}
+
+.note-header{
+  cursor:pointer;
+  background:#eef3ee;
+  padding:12px 16px;
+  border-radius:10px;
+  font-size:1.1rem;
+  font-weight:600;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.note-header::after{
+  content:"+";
+  font-size:1.3rem;
+}
+
+.note-header.active::after{
+  content:"–";
+}
+
+.note-content{
+  display:none;
+  margin-top:16px;
+  background:#ffffff;
+  padding:18px;
+  border-radius:12px;
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
+  line-height:1.6;
+  font-size:0.95rem;
+}
+
+.note-content.open{
+  display:block;
+}
+
+.note-content h4{
+  margin-top:0;
+  font-size:1.1rem;
+}
+
+.note-content h5{
+  margin-top:18px;
+  font-size:1rem;
+}
+
+.note-content ul{
+  margin-left:18px;
+}
+
+.inline-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  list-style:none;
+  padding:0;
+  margin-left:0;
+}
+
+.inline-list li{
+  background:#f0f4f0;
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:0.8rem;
+}
+
+.note-footer{
+  margin-top:16px;
+  font-size:0.85rem;
+  font-style:italic;
+  color:#555;
+}
+
+/* Category bar (headers only) */
+#category-bar{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
+  gap:12px;
+  margin-top:30px;
+}
+
+/* Category header cards */
+.category-header{
+  cursor:pointer;
+  background:#f0f4f0;
+  padding:12px;
+  border-radius:10px;
+  border-left:5px solid #4caf50;
+  font-size:1.05rem;
+  text-align:center;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+
+.category-header:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 14px rgba(0,0,0,.12);
+}
+
+.category-header.active{
+  background:#e4efe4;
+}
+
+/* Expanded content area (single column always) */
+#category-content-area{
+  margin-top:20px;
+}
+
+/* Content wrapper */
+.category-content{
+  background:#ffffff;
+  padding:18px;
+  border-radius:14px;
+  box-shadow:0 8px 22px rgba(0,0,0,.12);
+}
+
+/* Mobile behavior */
+@media (max-width: 600px){
+  #category-bar{
+    grid-template-columns:1fr;
+  }
+}
+
+/* Category badge */
+.category-header{
+  position:relative;
+}
+
+.category-count{
+  font-size:0.85rem;
+  opacity:0.7;
+  margin-left:6px;
+}
+
+/* Smooth animation for category content */
+.category-content{
+  overflow:hidden;
+  animation:fadeIn .25s ease;
+}
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(-6px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
   
 footer{
   margin:40px 0 10px;
@@ -269,7 +427,83 @@ In Hindu tradition, whenever a meaningful beginning, transition, or celebration 
 
 <h2>Occasions Where Auspicious Music Is Performed</h2>
 
-<div id="accordion"></div>
+<div id="category-bar"></div>
+<div id="category-content-area"></div>
+
+
+<!-- Note Section -->
+<div class="note-wrapper">
+
+  <div class="note-header" id="noteToggle">
+    Note
+  </div>
+
+  <div class="note-content" id="noteContent">
+
+    <h4>Understanding How These Occasions Are Identified</h4>
+
+    <p>
+      The occasions presented here are identified using a layered cultural understanding rooted in Hindu civilizational knowledge, where sound and music are regarded as sacred forces shaping life, society, and the environment.
+    </p>
+
+    <h5>Primary Sources</h5>
+    <ul>
+      <li>The Vedas, with special emphasis on the Sāmaveda, for principles of sacred sound (Nāda)</li>
+      <li>Gṛhya Sūtras and Dharmaśāstras for life-cycle rites (Saṁskāras)</li>
+      <li>Āgamas for temple-based ritual sound practices</li>
+      <li>Purāṇas for festival, river, and seasonal contexts</li>
+    </ul>
+
+    <h5>Secondary Sources</h5>
+    <ul>
+      <li>Living temple traditions</li>
+      <li>Regional folk practices</li>
+      <li>Oral cultural continuities</li>
+      <li>Community-based ritual observances</li>
+    </ul>
+
+    <h5>How Occasions Are Classified</h5>
+    <p>
+      Each occasion is grouped based on the source lineage from which the practice emerges. This does not imply hierarchy, but helps understand cultural roots.
+    </p>
+
+    <ul class="inline-list">
+      <li>Vedic</li>
+      <li>Smriti</li>
+      <li>Agama</li>
+      <li>Puranic</li>
+      <li>Folk / Regional</li>
+      <li>Modern (Dharmic Extension)</li>
+    </ul>
+
+    <h5>Modern Life Contexts</h5>
+    <p>
+      Contemporary occasions are included only when they align with enduring Hindu principles:
+    </p>
+
+    <ul>
+      <li>Auspicious beginnings (Śubha ārambha)</li>
+      <li>Gratitude (Kṛtajñatā)</li>
+      <li>Harmony between human activity and cosmic order (Ṛta)</li>
+    </ul>
+
+    <p>
+      Such occasions are clearly identified as modern extensions, ensuring clarity and cultural transparency.
+    </p>
+
+    <h5>Scope</h5>
+    <p>
+      This collection does not attempt to list every possible occasion. It reflects a living, evolving cultural expression shaped by texts, traditions, and continued practice.
+    </p>
+
+    <p class="note-footer">
+      No practice is presented as invented, and no modern practice is presented as ancient.
+    </p>
+
+  </div>
+
+</div>
+
 
 <footer>
 Heritage Moments • Living Cultural Registry
@@ -282,8 +516,11 @@ fetch("./master_heritage.json")
 .then(res => res.json())
 .then(data => {
 
-  const accordion = document.getElementById("accordion");
-  accordion.innerHTML = "";
+  const bar = document.getElementById("category-bar");
+  const contentArea = document.getElementById("category-content-area");
+
+  bar.innerHTML = "";
+  contentArea.innerHTML = "";
 
   const grouped = {};
 
@@ -294,56 +531,106 @@ fetch("./master_heritage.json")
     grouped[cat].push(o);
   });
 
-  // Alphabetical category order
-  Object.keys(grouped).sort().forEach(cat => {
+  // Alphabetical order
+  const categories = Object.keys(grouped).sort();
 
-    // Header
+  let activeCategory = null;
+
+  categories.forEach(cat => {
+
+    // Create header
     const header = document.createElement("div");
     header.className = "category-header";
-    header.textContent = cat;
+    header.innerHTML = `
+      <span>${cat}</span>
+      <span class="category-count">· ${grouped[cat].length}</span>
+`   ;
 
-    // Content
-    const content = document.createElement("div");
-    content.className = "category-content";
-
-    const section = document.createElement("div");
-    section.className = "grid"; // grid ONLY for cards
-
-    grouped[cat].forEach(o => {
-      const card = document.createElement("div");
-      card.className = "card";
-
-      const refText = o.ref || o.reference || "";
-
-      card.innerHTML = `
-        <div class="name">${o.name}</div>
-        ${o.why ? `<div class="why">Why: "${o.why}"</div>` : ""}
-        ${refText ? `<div class="ref">Reference: "${refText}"</div>` : ""}
-      `;
-
-      section.appendChild(card);
-    });
-
-    content.appendChild(section);
-
-    // Accordion logic: ONLY ONE OPEN
     header.addEventListener("click", () => {
-      const isOpen = content.classList.contains("open");
 
-      document.querySelectorAll(".category-content").forEach(c => c.classList.remove("open"));
-      document.querySelectorAll(".category-header").forEach(h => h.classList.remove("active"));
-
-      if (!isOpen) {
-        content.classList.add("open");
-        header.classList.add("active");
+      // If already open → close
+      if (activeCategory === cat) {
+        activeCategory = null;
+        contentArea.innerHTML = "";
+        document.querySelectorAll(".category-header")
+          .forEach(h => h.classList.remove("active"));
+        return;
       }
+
+      // Open new category
+      activeCategory = cat;
+      contentArea.innerHTML = "";
+
+      document.querySelectorAll(".category-header")
+        .forEach(h => h.classList.remove("active"));
+
+      header.classList.add("active");
+
+      // Build content
+      const wrapper = document.createElement("div");
+      wrapper.className = "category-content";
+
+      const grid = document.createElement("div");
+      grid.className = "grid";
+
+      grouped[cat].forEach(o => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const refText = o.ref || o.reference || "";
+
+        card.innerHTML = `
+          <div class="name">${o.name}</div>
+          ${o.why ? `<div class="why">Why: "${o.why}"</div>` : ""}
+          ${refText ? `<div class="ref">Reference: "${refText}"</div>` : ""}
+        `;
+
+        grid.appendChild(card);
+      });
+
+      wrapper.appendChild(grid);
+      contentArea.appendChild(wrapper);
+
+      // 🔥 Auto-collapse when clicking anywhere inside content
+      wrapper.addEventListener("click", () => {
+        wrapper.style.opacity = "0";
+        wrapper.style.transform = "translateY(-6px)";
+
+        setTimeout(() => {
+          activeCategory = null;
+          contentArea.innerHTML = "";
+          document.querySelectorAll(".category-header")
+            .forEach(h => h.classList.remove("active"));
+        }, 200);
+      });
+
+
     });
 
-    accordion.appendChild(header);
-    accordion.appendChild(content);
+    bar.appendChild(header);
   });
+
 });
 </script>
+
+
+<script>
+const noteHeader = document.getElementById("noteToggle");
+const noteContent = document.getElementById("noteContent");
+
+noteHeader.addEventListener("click", () => {
+  const isOpen = noteContent.classList.contains("open");
+
+  if(isOpen){
+    noteContent.classList.remove("open");
+    noteHeader.classList.remove("active");
+  } else {
+    noteContent.classList.add("open");
+    noteHeader.classList.add("active");
+  }
+});
+</script>
+
 
 </body>
 </html>
