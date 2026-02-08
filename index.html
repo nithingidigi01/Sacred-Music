@@ -124,16 +124,14 @@ h2{
 }
 
 /* ---------- CATEGORY CONTENT ---------- */
-#category-content-area{
-  margin-top:22px;
-}
-
 .category-content{
+  grid-column:1 / -1;
   background:#ffffff;
   padding:18px;
   border-radius:14px;
   box-shadow:0 10px 26px rgba(0,0,0,.14);
   animation:expandFade .28s ease;
+  margin-top:6px;
 }
 
 @keyframes expandFade{
@@ -189,28 +187,6 @@ h2{
 
 .note-content.open{ display:block; }
 
-.inline-list{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  list-style:none;
-  padding:0;
-}
-
-.inline-list li{
-  background:#f0f4f0;
-  padding:4px 10px;
-  border-radius:20px;
-  font-size:.8rem;
-}
-
-.note-footer{
-  margin-top:16px;
-  font-size:.85rem;
-  font-style:italic;
-  color:#555;
-}
-
 /* ---------- FOOTER ---------- */
 footer{
   margin:40px 0 10px;
@@ -255,7 +231,6 @@ footer{
 <h2>Occasions Where Auspicious Music Is Performed</h2>
 
 <div id="category-bar"></div>
-<div id="category-content-area"></div>
 
 <div class="note-wrapper">
   <div class="note-header" id="noteToggle">Note</div>
@@ -280,9 +255,9 @@ fetch("./master_heritage.json")
 .then(data => {
 
   const bar = document.getElementById("category-bar");
-  const area = document.getElementById("category-content-area");
   const grouped = {};
-  let active = null;
+  let activeHeader = null;
+  let activeContent = null;
 
   data.forEach(o=>{
     const c=o.cat||"Other";
@@ -296,18 +271,29 @@ fetch("./master_heritage.json")
     h.innerHTML=`${cat}<span class="category-count">· ${grouped[cat].length}</span>`;
 
     h.onclick=()=>{
-      if(active===cat){
-        active=null; area.innerHTML="";
-        document.querySelectorAll(".category-header").forEach(x=>x.classList.remove("active"));
+
+      /* Collapse if same */
+      if(activeHeader===h){
+        h.classList.remove("active");
+        activeContent.remove();
+        activeHeader=null;
+        activeContent=null;
         return;
       }
-      active=cat; area.innerHTML="";
-      document.querySelectorAll(".category-header").forEach(x=>x.classList.remove("active"));
+
+      /* Close previous */
+      if(activeHeader){
+        activeHeader.classList.remove("active");
+        activeContent.remove();
+      }
+
       h.classList.add("active");
 
-      const wrap=document.createElement("div");
-      wrap.className="category-content";
-      const g=document.createElement("div"); g.className="grid";
+      const content=document.createElement("div");
+      content.className="category-content";
+
+      const g=document.createElement("div");
+      g.className="grid";
 
       grouped[cat].forEach(o=>{
         const d=document.createElement("div");
@@ -316,9 +302,23 @@ fetch("./master_heritage.json")
         g.appendChild(d);
       });
 
-      wrap.appendChild(g);
-      area.appendChild(wrap);
+      content.appendChild(g);
+
+      /* Insert content immediately after header */
+      h.after(content);
+
+      /* Click anywhere inside → collapse */
+      content.onclick=()=>{
+        h.classList.remove("active");
+        content.remove();
+        activeHeader=null;
+        activeContent=null;
+      };
+
+      activeHeader=h;
+      activeContent=content;
     };
+
     bar.appendChild(h);
   });
 });
