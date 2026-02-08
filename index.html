@@ -90,6 +90,7 @@ h3{
 }
 
 .vidwaan-section{
+.vidwaan-section{
   margin-top:30px;
   margin-bottom:40px;
   text-align:center;
@@ -97,47 +98,49 @@ h3{
 
 .vidwaan-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:24px;
   margin-top:20px;
+  align-items:end;
 }
 
 .vidwaan-card{
-  background:#000;
-  border-radius:16px;
-  padding:16px;
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
-  transition:transform .25s ease;
+  background:transparent;
+  border-radius:14px;
+  padding:8px;
+  transition:transform .25s ease, box-shadow .25s ease;
 }
 
 .vidwaan-card:hover{
-  transform:translateY(-6px);
+  transform:translateY(-6px) scale(1.03);
+  box-shadow:0 12px 28px rgba(0,0,0,.18);
 }
 
 .vidwaan-card img{
   width:100%;
-  height:180px;
+  max-width:120px;
+  height:140px;
   object-fit:contain;
-  filter:grayscale(100%) contrast(1.15);
+  filter:grayscale(100%) contrast(1.1);
 }
 
 .vidwaan-name{
-  margin-top:10px;
+  margin-top:8px;
+  font-size:0.85rem;
   font-weight:600;
-  color:#fff;
-  letter-spacing:.5px;
+  color:#222;
 }
 
 .vidwaan-note{
-  margin-top:14px;
-  font-size:.7rem;
-  color:#555;
+  margin-top:12px;
+  font-size:0.7rem;
+  color:#666;
 }
 
 .vidwaan-note span{
   font-style:italic;
 }
-
+  
 .category-header{
   cursor:pointer;
   user-select:none;
