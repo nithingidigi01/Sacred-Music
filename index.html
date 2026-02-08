@@ -89,18 +89,6 @@ h3{
   margin-top:4px;
 }
 
-.why{
-  margin-top:6px;
-  font-size:0.9rem;
-  color:#333;
-}
-
-.ref{
-  margin-top:4px;
-  font-size:0.75rem;
-  color:#666;
-  font-style:italic;
-}
   
 footer{
   margin:40px 0 10px;
@@ -170,16 +158,16 @@ fetch("./master_heritage.json")
   const container = document.getElementById("grid");
   container.innerHTML = "";
 
-  // ✅ Correct grouping (cat → category → domain)
   const grouped = {};
 
+  // Group by category
   data.forEach(o => {
     const cat = o.cat || o.category || o.domain || "Other";
     if (!grouped[cat]) grouped[cat] = [];
     grouped[cat].push(o);
   });
 
-  // ✅ Render each category separately
+  // ✅ Alphabetical order of categories
   Object.keys(grouped).sort().forEach(cat => {
 
     // Category heading
@@ -187,7 +175,7 @@ fetch("./master_heritage.json")
     heading.textContent = cat;
     container.appendChild(heading);
 
-    // Category section
+    // Category grid
     const section = document.createElement("div");
     section.className = "grid";
 
@@ -197,8 +185,10 @@ fetch("./master_heritage.json")
 
       card.innerHTML = `
         <div class="name">${o.name || ("Occasion " + o.id)}</div>
-        ${o.why ? `<div class="why">${o.why}</div>` : ""}
-        ${o.reference ? `<div class="ref">Reference: ${o.reference}</div>` : ""}
+
+        ${o.why ? `<div class="why">Why: "${o.why}"</div>` : ""}
+
+        ${o.reference ? `<div class="ref">Reference: "${o.reference}"</div>` : ""}
       `;
 
       section.appendChild(card);
