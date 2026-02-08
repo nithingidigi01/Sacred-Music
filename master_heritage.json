@@ -267,76 +267,95 @@ fetch("./master_heritage.json")
   let activeHeader = null;
   let activeContent = null;
 
-  data.forEach(o=>{
-    const c=o.cat||"Other";
-    if(!grouped[c]) grouped[c]=[];
+  // Group by category
+  data.forEach(o => {
+    const c = o.cat || "Other";
+    if (!grouped[c]) grouped[c] = [];
     grouped[c].push(o);
   });
 
-  Object.keys(grouped).sort().forEach(cat=>{
-    const h=document.createElement("div");
-    h.className="category-header";
-    h.innerHTML=`${cat}<span class="category-count">· ${grouped[cat].length}</span>`;
+  // Render categories
+  Object.keys(grouped).sort().forEach(cat => {
 
-    h.onclick=()=>{
+    const h = document.createElement("div");
+    h.className = "category-header";
+    h.innerHTML = `${cat}<span class="category-count">· ${grouped[cat].length}</span>`;
 
-      if(activeHeader===h){
+    h.onclick = () => {
+
+      // Collapse if same category clicked
+      if (activeHeader === h) {
         h.classList.remove("active");
-        activeContent.remove();
-        activeHeader=null;
-        activeContent=null;
+        if (activeContent) activeContent.remove();
+        activeHeader = null;
+        activeContent = null;
         return;
       }
 
-      if(activeHeader){
+      // Close previously open category
+      if (activeHeader && activeContent) {
         activeHeader.classList.remove("active");
         activeContent.remove();
       }
 
       h.classList.add("active");
 
-      const content=document.createElement("div");
-      content.className="category-content";
+      const content = document.createElement("div");
+      content.className = "category-content";
 
-      const g=document.createElement("div");
-      g.className="grid";
+      const g = document.createElement("div");
+      g.className = "grid";
 
-      grouped[cat].forEach(o=>{
-        const d=document.createElement("div");
-        d.className="card";
+      grouped[cat].forEach(o => {
+        const d = document.createElement("div");
+        d.className = "card";
 
-        d.innerHTML=`
-          <div class="name">${o.name}</div>
-          ${o.why ? `<div class="why">Why: "${o.why}"</div>` : ""}
-          ${o.ref ? `<div class="ref">Reference: "${o.ref}"</div>` : ""}
-          ${o.textual_classification ? `<div class="classification">Classification: "${o.textual_classification}"</div>` : ""}
-        `;
+        // 🔒 SAFE string construction (NO nested templates)
+        let html = `<div class="name">${o.name}</div>`;
 
+        if (o.why) {
+          html += `<div class="why">Why: "${o.why}"</div>`;
+        }
+
+        if (o.ref) {
+          html += `<div class="ref">Reference: "${o.ref}"</div>`;
+        }
+
+        if (o.textual_classification) {
+          html += `<div class="classification">Classification: "${o.textual_classification}"</div>`;
+        }
+
+        d.innerHTML = html;
         g.appendChild(d);
       });
 
       content.appendChild(g);
+
+      // Insert content directly after clicked category
       h.after(content);
 
-      content.onclick=()=>{
+      // Click anywhere inside → collapse
+      content.onclick = () => {
         h.classList.remove("active");
         content.remove();
-        activeHeader=null;
-        activeContent=null;
+        activeHeader = null;
+        activeContent = null;
       };
 
-      activeHeader=h;
-      activeContent=content;
+      activeHeader = h;
+      activeContent = content;
     };
 
     bar.appendChild(h);
   });
 });
 
-document.getElementById("noteToggle").onclick=()=>{
+// Note toggle
+document.getElementById("noteToggle").onclick = () => {
   document.getElementById("noteContent").classList.toggle("open");
 };
 </script>
+
 
 </body>
 </html>
