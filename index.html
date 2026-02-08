@@ -89,6 +89,34 @@ h3{
   margin-top:4px;
 }
 
+.category-header{
+  cursor:pointer;
+  user-select:none;
+  background:#f0f4f0;
+  padding:10px 12px;
+  border-radius:8px;
+  border-left:5px solid #4caf50;
+  font-size:1.3rem;
+}
+
+.category-header::after{
+  content:"➕";
+  float:right;
+  font-size:1rem;
+}
+
+.category-header.active::after{
+  content:"➖";
+}
+
+.category-content{
+  display:none;
+  margin-top:10px;
+}
+
+.category-content.open{
+  display:block;
+}
   
 footer{
   margin:40px 0 10px;
@@ -167,12 +195,17 @@ fetch("./master_heritage.json")
     grouped[cat].push(o);
   });
 
-  // Alphabetical category order
+  // Alphabetical order
   Object.keys(grouped).sort().forEach(cat => {
 
-    const heading = document.createElement("h3");
-    heading.textContent = cat;
-    container.appendChild(heading);
+    // Header
+    const header = document.createElement("div");
+    header.className = "category-header";
+    header.textContent = cat;
+
+    // Content wrapper
+    const content = document.createElement("div");
+    content.className = "category-content";
 
     const section = document.createElement("div");
     section.className = "grid";
@@ -185,16 +218,29 @@ fetch("./master_heritage.json")
 
       card.innerHTML = `
         <div class="name">${o.name || ("Occasion " + o.id)}</div>
-
         ${o.why ? `<div class="why">Why: "${o.why}"</div>` : ""}
-
         ${refText ? `<div class="ref">Reference: "${refText}"</div>` : ""}
       `;
 
       section.appendChild(card);
     });
 
-    container.appendChild(section);
+    content.appendChild(section);
+
+    // Toggle behavior
+    header.onclick = () => {
+      const open = content.classList.contains("open");
+      document.querySelectorAll(".category-content").forEach(c => c.classList.remove("open"));
+      document.querySelectorAll(".category-header").forEach(h => h.classList.remove("active"));
+
+      if (!open) {
+        content.classList.add("open");
+        header.classList.add("active");
+      }
+    };
+
+    container.appendChild(header);
+    container.appendChild(content);
   });
 });
 </script>
